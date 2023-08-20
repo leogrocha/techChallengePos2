@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EletrodomesticoFilters {
 
-    private Long id;
     private String nome;
     private String modelo;
     private String marca;
