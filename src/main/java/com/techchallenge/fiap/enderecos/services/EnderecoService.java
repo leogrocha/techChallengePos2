@@ -35,27 +35,6 @@ public class EnderecoService {
         return convertToResponse(endereco);
     }
 
-    public List<EnderecoResponse> buscarEnderecosPorRua(String rua) {
-        EnderecoFilters filters = new EnderecoFilters();
-        filters.setRua(rua);
-
-        return findAll(filters);
-    }
-
-    public List<EnderecoResponse> buscarEnderecosPorBairro(String bairro) {
-        EnderecoFilters filters = new EnderecoFilters();
-        filters.setBairro(bairro);
-
-        return findAll(filters);
-    }
-
-    public List<EnderecoResponse> buscarEnderecosPorCidade(String cidade) {
-        EnderecoFilters filters = new EnderecoFilters();
-        filters.setCidade(cidade);
-
-        return findAll(filters);
-    }
-
     public List<EnderecoResponse> findAll(EnderecoFilters filters) {
         return repository
                 .findAll(filterApplier.apply(filters))

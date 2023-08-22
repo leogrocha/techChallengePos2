@@ -29,19 +29,6 @@ public class EnderecoController {
         return ResponseEntity.ok(service.findAll(filters));
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<List<EnderecoResponse>> buscarEnderecos(
-            @RequestParam(required = false) String rua,
-            @RequestParam(required = false) String bairro,
-            @RequestParam(required = false) String cidade) {
-        EnderecoFilters filters = new EnderecoFilters();
-        filters.setRua(rua);
-        filters.setBairro(bairro);
-        filters.setCidade(cidade);
-
-        return ResponseEntity.ok(service.findAll(filters));
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<EnderecoResponse> getById(@PathVariable Long id) {
         return service.findById(id)
@@ -60,6 +47,5 @@ public class EnderecoController {
         String message = "Endereço de ID " + id + " foi deletado com sucesso.";
         service.deleteById(id);
         return ResponseEntity.ok(message);
-    }
     }
 }
