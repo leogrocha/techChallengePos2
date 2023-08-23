@@ -44,8 +44,6 @@ public class EnderecoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
-        String message = "Endereço de ID " + id + " foi deletado com sucesso.";
-        service.deleteById(id);
-        return ResponseEntity.ok(message);
+        return ResponseEntity.ok(service.deleteById(id));
     }
 }

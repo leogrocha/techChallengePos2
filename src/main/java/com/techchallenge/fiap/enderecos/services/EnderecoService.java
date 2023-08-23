@@ -58,8 +58,9 @@ public class EnderecoService {
     }
 
     @Transactional
-    public void deleteById(Long id) {
+    public String deleteById(Long id) {
         repository.deleteById(findEnderecoById(id).getId());
+        return "Endereço de ID " + id + " foi deletado com sucesso.";
     }
 
     private Endereco findEnderecoById(Long id) {
