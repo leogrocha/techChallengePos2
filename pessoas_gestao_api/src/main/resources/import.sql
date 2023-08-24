@@ -1,0 +1,1 @@
+insert into tb_pessoas (data_nascimento, idade, parentesco, sexo, nome) values ('1950-03-01', 10, 0, 0, 'Seu Madruga');
