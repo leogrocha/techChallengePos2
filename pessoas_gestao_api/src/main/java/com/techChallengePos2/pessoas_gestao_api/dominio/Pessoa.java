@@ -33,7 +33,6 @@ public class Pessoa {
     private LocalDate dataNascimento;
     private Sexo sexo;
     private Parentesco parentesco;
-    private Integer idade;
 
     @ManyToOne
     @JoinColumn(name = "idusuario")
@@ -45,7 +44,6 @@ public class Pessoa {
         dataNascimento = dto.getDataNascimento();
         sexo = dto.getSexo();
         parentesco = dto.getParentesco();
-        idade = dto.getIdade();
     }
 
 }

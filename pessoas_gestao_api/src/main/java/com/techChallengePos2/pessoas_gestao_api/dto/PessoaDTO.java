@@ -19,12 +19,11 @@ public class PessoaDTO {
     private LocalDate dataNascimento;
     private Sexo sexo;
     private Parentesco parentesco;
-    private Integer idade;
 
 
     public PessoaDTO(Pessoa entity) {
         this(entity.getIdpessoa(), entity.getNome(), entity.getDataNascimento(), entity.getSexo(),
-        entity.getParentesco(), entity.getIdade());
+        entity.getParentesco());
     }
 
 
