@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.techChallengePos2.pessoas_gestao_api.dominio.Usuario;
 import com.techChallengePos2.pessoas_gestao_api.dto.UsuarioDTO;
 import com.techChallengePos2.pessoas_gestao_api.repository.UsuarioRepository;
+import com.techChallengePos2.pessoas_gestao_api.services.exception.ControllerNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -23,9 +25,9 @@ public class UsuarioService {
 
     @Transactional(readOnly = true)
     public UsuarioDTO findById(Long idusuario) {
-        return repository.findById(idusuario).map(usuario -> new UsuarioDTO(usuario)).get();
+        Usuario usuario = repository.findById(idusuario)
+                .orElseThrow(() -> new ControllerNotFoundException("Recurso não encontrado"));
+        return new UsuarioDTO(usuario);
     }
 
-
-    
 }
