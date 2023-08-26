@@ -7,14 +7,12 @@ import com.techChallengePos2.pessoas_gestao_api.dominio.Mocks.Parentesco;
 import com.techChallengePos2.pessoas_gestao_api.dominio.Mocks.Sexo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class PessoaDTO {
     
-    @EqualsAndHashCode.Include private Long iddepssoa;
+    private Long iddepssoa;
     private String nome;
     private LocalDate dataNascimento;
     private Sexo sexo;
