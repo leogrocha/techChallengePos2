@@ -4,6 +4,7 @@ import com.techchallenge.fiap.common.exception.NotFoundException;
 import com.techchallenge.fiap.pessoas.controller.dto.PessoaFilters;
 import com.techchallenge.fiap.pessoas.controller.dto.PessoaRequest;
 import com.techchallenge.fiap.pessoas.controller.dto.PessoaResponse;
+import com.techchallenge.fiap.pessoas.dominio.GrupoFamiliar;
 import com.techchallenge.fiap.pessoas.dominio.Pessoa;
 import com.techchallenge.fiap.pessoas.repository.PessoaRepository;
 import com.techchallenge.fiap.pessoas.specifications.PessoaFilterApplier;
@@ -22,12 +23,19 @@ public class PessoaService {
 
     private final PessoaRepository repository;
     private final PessoaFilterApplier filterApplier;
+    private final GrupoFamiliarService grupoFamiliarService;
+    private final RelacaoFamiliarService relacaoFamiliarService;
 
     @Transactional
     public PessoaResponse save(PessoaRequest request) {
         var pessoa = Pessoa.of(request);
-
         repository.save(pessoa);
+
+        // Verifica ou cria o GrupoFamiliar
+        var grupo = grupoFamiliarService.verifyOrCreateGroup(pessoa);
+
+        // Estabelece os relacionamentos após salvar a pessoa
+        relacaoFamiliarService.establishRelationships(pessoa, grupo);
 
         return convertToResponse(pessoa);
     }

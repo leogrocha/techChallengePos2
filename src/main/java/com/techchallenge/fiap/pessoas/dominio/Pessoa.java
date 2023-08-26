@@ -32,13 +32,6 @@ public class Pessoa {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    @Column(name = "parentesco")
-    @Enumerated(EnumType.STRING)
-    private Parentesco parentesco;
-
-    @Column(name = "idade")
-    private Integer idade;
-
     public static Pessoa of(PessoaRequest request) {
         var response = new Pessoa();
         copyProperties(request, response);
