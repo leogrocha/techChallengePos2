@@ -5,6 +5,8 @@ import com.techchallenge.fiap.eletrodomesticos.controller.dto.EletrodomesticoReq
 import com.techchallenge.fiap.eletrodomesticos.controller.dto.EletrodomesticoResponse;
 import com.techchallenge.fiap.common.exception.NotFoundException;
 import com.techchallenge.fiap.eletrodomesticos.dominio.Eletrodomestico;
+import com.techchallenge.fiap.eletrodomesticos.dominio.EletrodomesticoPessoa;
+import com.techchallenge.fiap.eletrodomesticos.repository.EletrodomesticoPessoaRepository;
 import com.techchallenge.fiap.eletrodomesticos.repository.EletrodomesticoRepository;
 import com.techchallenge.fiap.eletrodomesticos.specifications.EletrodomesticoFilterApplier;
 import com.techchallenge.fiap.pessoas.services.PessoaService;
@@ -24,6 +26,7 @@ public class EletrodomesticoService {
     private final EletrodomesticoRepository repository;
     private final EletrodomesticoFilterApplier filterApplier;
     private final PessoaService pessoaService;
+    private final EletrodomesticoPessoaRepository eletrodomesticoPessoaRepository;
 
     @Transactional
     public EletrodomesticoResponse save(EletrodomesticoRequest request) {
@@ -31,6 +34,10 @@ public class EletrodomesticoService {
 
         eletrodomestico.setPessoa(pessoaService.findPessoaById(request.getPessoaId()));
         repository.save(eletrodomestico);
+        EletrodomesticoPessoa eletrodomesticoPessoa = new EletrodomesticoPessoa();
+        eletrodomesticoPessoa.setEletrodomestico(eletrodomestico);
+        eletrodomesticoPessoa.setPessoa(eletrodomestico.getPessoa());
+        eletrodomesticoPessoaRepository.save(eletrodomesticoPessoa);
 
         return convertToResponse(eletrodomestico);
     }
